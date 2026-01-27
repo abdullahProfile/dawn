@@ -1,0 +1,99 @@
+<style>
+  .announcment-bar {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
+
+  .announcment-bar_contianer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .announcment-bar_text {
+    font-size: {{ section.settings['font-size'] }}rem;
+    font-weight: {{ section.settings['font-weight'] }};
+  }
+
+  .icon-link {
+    display: inline-flex;
+    align-items: center;
+    color: currentColor;
+  }
+
+  .icon-link img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    display: block;
+  }
+
+</style>
+
+<section class="announcment-bar">
+  <div class="announcment-bar_contianer">
+      <p class="announcment-bar_text">{{ section.settings.announcment-text }}</p>
+    {% if section.settings.link !=blank %}
+
+      <a href="{{ section.settings.link }}" class="icon-link">
+        <img src="{{ 'icon-arrow.svg' | asset_url }}" alt="Arrow icon">
+      </a>
+
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "announcment bar",
+    "tag": "section",
+    "class": "announcment-bar",
+    "limit": 1,
+
+    "settings": [
+      {
+        "type": "text",
+        "id": "announcment-text",
+        "label": "text",
+        "default": "welcome to our store"
+      },
+
+      {
+        "type": "range",
+        "label": "font size",
+        "id": "font-size",
+        "min": 0.6,
+        "max": 2,
+        "step": 0.1,
+        "default": 0.6,
+        "unit": "rem"
+      },
+
+      {
+        "type": "select",
+        "label": "font wieght",
+        "id": "font-weight",
+
+        "options": [
+          {"value": "700", "label": "bold"},
+          {"value": "600", "label": "medium"},
+          {"value": "400", "label": "regular"}
+        ]
+      },
+
+      {
+        "type": "url",
+        "id": "link",
+        "label": "Link"
+      }
+    ],
+
+    "presets": [
+      {
+        "name": "annoucment bar"
+      }
+    ]
+  }
+{% endschema %}
