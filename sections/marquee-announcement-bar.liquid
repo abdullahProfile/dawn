@@ -4,7 +4,7 @@
     top: 0;
     z-index: 999;
     background: {{ section.settings.announcemen-bar_background}};
-    overflow: hidden
+    overflow: hidden;
   }
 
   .announcement-bar__content {
@@ -75,8 +75,6 @@
 
 </style>
 
-<section class="section-marquee-bar">
-
   <a href="{{ section.settings.link }}" class="announcement-bar__content {% if section.settings.enable_animation %} is-animated{% endif %}">
 
     <span class="announcement-bar__text">
@@ -86,20 +84,20 @@
     {% if section.settings.show_arrow %}
 
       {% unless section.settings.enable_animation %}
+
         <span class="announcement-bar__arrow {% if section.settings['is-arrow_animated'] %}is-arrow_animated{% endif %}">
           <img src="{{ 'icon-arrow.svg' | asset_url }}" alt="Arrow" width="16" height="16" loading="lazy">
         </span>
+
       {% endunless %}
 
     {% endif %}
   </a>
 
-</section>
-
 {% schema %}
   {
     "name": "Marquee Announcement",
-    "tag": "section",
+    "tag": "header",
     "class": "section-marquee-bar",
     "limit": 1,
 
@@ -192,7 +190,21 @@
         "id": "is-arrow_animated",
         "default":false,
       },
+    ],
 
+    "blocks": [
+      {
+        "type": "announcement",
+        "name": "Announcement",
+        "settings": [
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Message",
+            "default": "Welcome to our store"
+          },
+        ]
+      }
     ],
 
     "presets": [
