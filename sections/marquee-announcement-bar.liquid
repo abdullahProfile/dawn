@@ -1,5 +1,5 @@
 <style>
-  .announcment-bar {
+  .section-marquee-bar {
     position: sticky;
     top: 0;
     z-index: 999;
@@ -17,11 +17,11 @@
     gap: 10px;
   }
 
-  .announcment-bar_contianer.is-animated .announcement-bar__content {
+ .announcement-bar__content.is-animated {
     animation: {{ section.settings.slid_animation_direction }} 12s linear infinite;
   }
 
-  .announcment-bar_contianer .announcement-bar__content:hover {
+  .announcement-bar__content:hover {
     animation-play-state: paused;
   }
 
@@ -75,33 +75,32 @@
 
 </style>
 
-<section class="announcment-bar">
-<div
-  class="announcment-bar_contianer
-  {% if section.settings.enable_animation %} is-animated{% endif %}"
->
-  <a href="{{ section.settings.link }}" class="announcement-bar__content">
+<section class="section-marquee-bar">
+
+  <a href="{{ section.settings.link }}" class="announcement-bar__content {% if section.settings.enable_animation %} is-animated{% endif %}">
+
     <span class="announcement-bar__text">
       {{ section.settings.announcment-text }}
     </span>
 
     {% if section.settings.show_arrow %}
+
       {% unless section.settings.enable_animation %}
         <span class="announcement-bar__arrow {% if section.settings['is-arrow_animated'] %}is-arrow_animated{% endif %}">
           <img src="{{ 'icon-arrow.svg' | asset_url }}" alt="Arrow" width="16" height="16" loading="lazy">
         </span>
       {% endunless %}
+
     {% endif %}
   </a>
-</div>
 
 </section>
 
 {% schema %}
   {
-    "name": "announcment bar",
+    "name": "Marquee Announcement",
     "tag": "section",
-    "class": "announcment-bar",
+    "class": "section-marquee-bar",
     "limit": 1,
 
     "settings": [

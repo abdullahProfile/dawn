@@ -363,8 +363,8 @@
         "html_class": ""
       }
     },
-    "announcement-bar-2": {
-      "type": "announcement-bar-2",
+    "marquee-announcement-bar": {
+      "type": "marquee-announcement-bar",
       "settings": {
         "announcment-text": "Welcome to our store"
       }
@@ -376,6 +376,6 @@
     "image_with_text_G6WgMw",
     "collapsible_content_RMNe49",
     "tp_testimonials_2_4pU4bf",
-    "announcement-bar-2"
+    "marquee-announcement-bar"
   ]
 }
