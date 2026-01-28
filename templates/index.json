@@ -368,7 +368,19 @@
       "settings": {
         "announcment-text": "Welcome to our store"
       }
+    },
+      "text_block": {
+        "type": "text-block",
+        "settings": {
+          "text": "<p>Discover the perfect blend of comfort and minimalism. These all-white sneakers are made to match every outfit—casual or classy. Ready for your next step?</p>"
+        }
+    },
+
+    "panel": {
+      "type": "panel",
+      "settings":{}
     }
+
   },
   "order": [
     "slideshow_GaEEdq",
@@ -376,6 +388,8 @@
     "image_with_text_G6WgMw",
     "collapsible_content_RMNe49",
     "tp_testimonials_2_4pU4bf",
-    "marquee-announcement-bar"
+    "marquee-announcement-bar",
+    "text_block",
+    "panel"
   ]
 }
