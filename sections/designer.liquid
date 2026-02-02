@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: {{ section.settings.section_flex_direction }};
     gap: {{ section.settings.section_gap_between }}px;
+    background: {{ section.settings.section_bg }}
   }
 
   {% if section.settings.section_flex_direction == 'row' %}
@@ -31,6 +32,7 @@
     align-items: {{ section.settings.card_align_items }};
     gap: {{ section.settings.gap_inner }}px;
     flex-direction: {{ section.settings.content_flex_direction }};
+    background: {{ section.settings.card_bg }};
   }
 
   .designer-card__image img {
@@ -42,6 +44,7 @@
 
   .designer-card__content {
     max-width: 600px;
+    padding-inline: {{ section.settings.content_padding_inline }}px;
   }
 
   .designer-card__title {
@@ -49,7 +52,35 @@
     font-weight: {{ section.settings.title_font_weight }};
     margin: 0;
     margin-bottom: 12px;
+    color: {{ section.settings.title_color }};
   }
+
+  {% if section.settings.card_bg == '#fff' %}
+    .designer-card__title,.designer-card__description {
+      color: #000;
+    }
+
+    {% elsif section.settings.card_bg == '#000' %}
+    .designer-card__title,.designer-card__description {
+      color: #fff;
+    }
+
+    .designer-card__link {
+      background: #fff;
+      color: #000;
+    }
+
+    {% elsif section.settings.card_bg == '#797979' %}
+    .designer-card__title,.designer-card__description {
+      color: #000;
+    }
+
+    .designer-card__link {
+      background: #fff;
+      color: #000;
+    }
+
+  {% endif %}
 
   .designer-card__description {
     font-size: {{ section.settings.description_font_size }}px;
@@ -117,14 +148,8 @@
   "settings": [
 
     {
-      "type": "range",
-      "id": "section_width",
-      "label": "section width",
-      "min": 1200,
-      "max": 1900,
-      "step": 100,
-      "default": 1200,
-      "unit": "px"
+      "type": "header",
+      "content": "Layout"
     },
 
     {
@@ -146,6 +171,38 @@
         },
 
       ]
+    },
+
+    {
+      "type": "select",
+      "id": "content_flex_direction",
+      "label": "content flex direction",
+      "default": "row",
+
+      "options": [
+
+        {
+          "value": "row",
+          "label": "row"
+        },
+
+        {
+          "value": "column",
+          "label": "column"
+        }
+
+      ]
+    },
+
+    {
+      "type": "range",
+      "id": "section_width",
+      "label": "section width",
+      "min": 1200,
+      "max": 1900,
+      "step": 100,
+      "default": 1200,
+      "unit": "px"
     },
 
     {
@@ -197,23 +254,27 @@
 
     {
       "type": "select",
-      "id": "content_flex_direction",
-      "label": "content flex direction",
-      "default": "row",
+      "id": "fit",
+      "label": "image fit",
+      "default": "cover",
 
       "options": [
-
         {
-          "value": "row",
-          "label": "row"
+          "value": "cover",
+          "label": "cover"
         },
 
         {
-          "value": "column",
-          "label": "column"
+          "value": "fill",
+          "label": "fill"
         }
 
       ]
+    },
+
+    {
+      "type": "header",
+      "content": "Contents Size"
     },
 
     {
@@ -232,26 +293,6 @@
           "value": "700px",
           "label": "large",
         },
-
-      ]
-    },
-
-    {
-      "type": "select",
-      "id": "fit",
-      "label": "fit",
-      "default": "cover",
-
-      "options": [
-        {
-          "value": "cover",
-          "label": "cover"
-        },
-
-        {
-          "value": "fill",
-          "label": "fill"
-        }
 
       ]
     },
@@ -313,6 +354,76 @@
       "step": 2,
       "default": 16,
       "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "content_padding_inline",
+      "label": "contetn padding inline",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 0,
+      "unit": "px"
+    },
+
+    {
+      "type": "header",
+      "content": "Design"
+    },
+
+    {
+      "type": "select",
+      "id": "section_bg",
+      "label": "section background",
+
+      "options": [
+
+        {
+          "value": "#000",
+          "label": "Black"
+        },
+
+        {
+          "value": "#797979",
+          "label": "Gray"
+        },
+
+        {
+          "value": "#fff",
+          "label": "White"
+        },
+
+      ],
+
+      "default": "#fff"
+    },
+
+    {
+      "type": "select",
+      "id": "card_bg",
+      "label": "cards background",
+
+      "options": [
+
+        {
+          "value": "#000",
+          "label": "Black"
+        },
+
+        {
+          "value": "#797979",
+          "label": "Gray"
+        },
+
+        {
+          "value": "#fff",
+          "label": "White"
+        },
+
+      ],
+
+      "default": "#fff"
     },
 
   ],
