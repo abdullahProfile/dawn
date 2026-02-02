@@ -1,24 +1,43 @@
 <style>
   .designer-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
+    max-width: {{ section.settings.section_width }}px;
+    margin-inline: auto;
     display: flex;
-    flex-direction: column;
-    gap: 40px;
+    flex-direction: {{ section.settings.section_flex_direction }};
+    gap: {{ section.settings.section_gap_between }}px;
   }
+
+  {% if section.settings.section_flex_direction == 'row' %}
+    .designer-section {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-inline: 20px;
+    }
+
+    .designer-section::-webkit-scrollbar {
+       display: none;
+    }
+
+    .designer-section .designer-card {
+      flex: 0 0 40%;
+      scroll-snap-align: start;
+    }
+
+  {% endif %}
 
   .designer-card {
     display: flex;
-    align-items: center;
-    gap: 32px;
+    align-items: {{ section.settings.card_align_items }};
+    gap: {{ section.settings.gap_inner }}px;
+    flex-direction: {{ section.settings.content_flex_direction }};
   }
 
   .designer-card__image img {
-    width: 300px;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
+    width: {{ section.settings.image_width }};
+    border-radius: {{ section.settings.img_border_radius }}px;
+    object-fit: {{ section.settings.fit }};
+    height: 100%;
   }
 
   .designer-card__content {
@@ -26,14 +45,16 @@
   }
 
   .designer-card__title {
-    font-size: 28px;
-    font-weight: 600;
-    margin: 0 0 12px;
+    font-size: {{ section.settings.title }}px;
+    font-weight: {{ section.settings.title_font_weight }};
+    margin: 0;
+    margin-bottom: 12px;
   }
 
   .designer-card__description {
-    font-size: 16px;
+    font-size: {{ section.settings.description_font_size }}px;
     line-height: 1.6;
+    margin: 0;
     margin-bottom: 16px;
   }
 
@@ -51,10 +72,11 @@
 <section class="designer-section">
   {% for designer in shop.metaobjects.designer.values %}
     <div class="designer-card">
+
       {% if designer.image %}
         <div class="designer-card__image">
           <img
-            src="{{ designer.image | img_url: '600x' }}"
+            src="{{ designer.image | img_url: '700x' }}"
             alt="{{ designer.name }}"
             loading="lazy"
           >
@@ -81,6 +103,7 @@
           >
             Learn more
           </a>
+
         {% endif %}
       </div>
     </div>
@@ -89,11 +112,214 @@
 
 {% schema %}
 {
-  "name": "Designers (Metaobject)",
-  "settings": [],
+  "name": "Designers",
+
+  "settings": [
+
+    {
+      "type": "range",
+      "id": "section_width",
+      "label": "section width",
+      "min": 1200,
+      "max": 1900,
+      "step": 100,
+      "default": 1200,
+      "unit": "px"
+    },
+
+    {
+      "type": "select",
+      "id": "section_flex_direction",
+      "label": "section flex direction",
+      "default": "column",
+
+      "options": [
+
+        {
+          "value": "row",
+          "label": "row",
+        },
+
+        {
+          "value": "column",
+          "label": "column"
+        },
+
+      ]
+    },
+
+    {
+      "type": "range",
+      "id": "section_gap_between",
+      "label": "section items gap",
+      "min": 20,
+      "max": 80,
+      "step": 10,
+      "default": 40,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "gap_inner",
+      "label": "content gap",
+      "min": 20,
+      "max": 40,
+      "step": 4,
+      "default": 20,
+      "unit": "px"
+    },
+
+    {
+      "type": "select",
+      "id": "card_align_items",
+      "label": "content alignment",
+      "default": "center",
+
+      "options": [
+
+        {
+          "value": "center",
+          "label": "center"
+        },
+
+        {
+          "value": "flex-start",
+          "label": "flex-start",
+        },
+
+        {
+          "value": "flex-end",
+          "label": "flex-end"
+        }
+      ]
+    },
+
+    {
+      "type": "select",
+      "id": "content_flex_direction",
+      "label": "content flex direction",
+      "default": "row",
+
+      "options": [
+
+        {
+          "value": "row",
+          "label": "row"
+        },
+
+        {
+          "value": "column",
+          "label": "column"
+        }
+
+      ]
+    },
+
+    {
+      "type": "select",
+      "id": "image_width",
+      "label": "image width",
+      "default": "500px",
+
+      "options": [
+        {
+          "value": "500px",
+          "label": "small",
+        },
+
+        {
+          "value": "700px",
+          "label": "large",
+        },
+
+      ]
+    },
+
+    {
+      "type": "select",
+      "id": "fit",
+      "label": "fit",
+      "default": "cover",
+
+      "options": [
+        {
+          "value": "cover",
+          "label": "cover"
+        },
+
+        {
+          "value": "fill",
+          "label": "fill"
+        }
+
+      ]
+    },
+
+    {
+      "type": "range",
+      "id": "img_border_radius",
+      "label": "image border-radius",
+      "min": 0,
+      "max": 20,
+      "step": 4,
+      "default": 0,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "title",
+      "label": "Title font size",
+      "min": 28,
+      "max": 48,
+      "step": 2,
+      "default": 28,
+      "unit": "px"
+    },
+
+    {
+      "type": "select",
+      "id": "title_font_weight",
+      "label": "Title font-weight",
+      "default": "700",
+
+      "options": [
+
+        {
+          "value": "700",
+          "label": "Bold"
+        },
+
+        {
+          "value": "600",
+          "label": "Medium"
+        },
+
+        {
+          "value": "500",
+          "label": "Regular"
+        },
+
+      ]
+    },
+
+    {
+      "type": "range",
+      "id": "description_font_size",
+      "label": "Description font size",
+      "min": 10,
+      "max": 30,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+
+  ],
+
   "presets": [
     {
-      "name": "Designers Section"
+      "name": "Designers"
     }
   ]
 }
