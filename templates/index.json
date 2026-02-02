@@ -374,6 +374,11 @@
     "panel": {
       "type": "panel",
       "settings":{}
+    },
+
+    "designer": {
+      "type": "designer",
+      "settings": {}
     }
 
   },
@@ -384,6 +389,7 @@
     "collapsible_content_RMNe49",
     "tp_testimonials_2_4pU4bf",
     "text_block",
-    "panel"
+    "panel",
+    "designer"
   ]
 }

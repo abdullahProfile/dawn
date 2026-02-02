@@ -1,0 +1,100 @@
+<style>
+  .designer-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .designer-card {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .designer-card__image img {
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .designer-card__content {
+    max-width: 600px;
+  }
+
+  .designer-card__title {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 12px;
+  }
+
+  .designer-card__description {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .designer-card__link {
+    display: inline-block;
+    padding: 10px 16px;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+
+</style>
+
+<section class="designer-section">
+  {% for designer in shop.metaobjects.designer.values %}
+    <div class="designer-card">
+      {% if designer.image %}
+        <div class="designer-card__image">
+          <img
+            src="{{ designer.image | img_url: '600x' }}"
+            alt="{{ designer.name }}"
+            loading="lazy"
+          >
+        </div>
+      {% endif %}
+
+      <div class="designer-card__content">
+        {% if designer.name %}
+          <h2 class="designer-card__title">
+            {{ designer.name }}
+          </h2>
+        {% endif %}
+
+        {% if designer.description %}
+          <p class="designer-card__description">
+            {{ designer.description }}
+          </p>
+        {% endif %}
+
+        {% if designer.url %}
+          <a
+            href="{{ designer.url }}"
+            class="designer-card__link"
+          >
+            Learn more
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</section>
+
+{% schema %}
+{
+  "name": "Designers (Metaobject)",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Designers Section"
+    }
+  ]
+}
+{% endschema %}
