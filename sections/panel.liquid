@@ -1,5 +1,5 @@
 {%- style -%}
-  .panel_section-{{ section.id }} {
+  .panel-{{ section.id }} {
     display: flex;
     gap: {{ section.settings.gap_between }}px;
     flex-direction: {{ section.settings.flex_direction }};
@@ -8,7 +8,6 @@
     max-width: {{ section.settings.width}}px;
     margin-inline: auto;
   }
-
 
   {% for block in section.blocks %}
     .panel_{{ block.id }} {
@@ -68,7 +67,7 @@
   }
 {%- endstyle -%}
 
-<section class="panel_section-{{ section.id }}">
+<section class="panel-{{ section.id }}">
   {% for block in section.blocks %}
     {% case block.type %}
       {% when 'url' %}
@@ -97,14 +96,14 @@
 
 {% schema %}
 {
-  "name": "Panel Section",
+  "name": "Panel",
 
   "settings": [
 
     {
       "type": "range",
       "id": "width",
-      "label": "section width on disktop",
+      "label": "section width disktop",
       "min": 600,
       "max": 1920,
       "step": 40,
@@ -115,7 +114,7 @@
       {
       "type": "range",
       "id": "width_mobile",
-      "label": "section width on mobile",
+      "label": "section width mobile",
       "min": 320,
       "max": 1040,
       "step": 60,
@@ -126,7 +125,7 @@
     {
       "type": "range",
       "id": "margin_block",
-      "label": "Margin block on Desktop",
+      "label": "Margin block Desktop",
       "min": 0,
       "max": 100,
       "step": 10,
@@ -137,7 +136,7 @@
     {
       "type": "range",
       "id": "margin_block_mobile",
-      "label": "Margin block on Mobile",
+      "label": "Margin block Mobile",
       "min": 0,
       "max": 100,
       "step": 10,
@@ -276,7 +275,7 @@
 
         {
           "type": "range",
-          "label": "font size on desktop",
+          "label": "font size desktop",
           "id": "font_size",
           "min": 16,
           "max": 60,
@@ -286,7 +285,7 @@
 
         {
           "type": "range",
-          "label": "font size on mobile",
+          "label": "font size mobile",
           "id": "font_size_mobile",
           "min": 12,
           "max": 60,
@@ -296,7 +295,7 @@
 
         {
           "type": "select",
-          "label": "font wieght on desktop",
+          "label": "font wieght Desktop",
           "id": "font_weight",
           "default": "500",
 
@@ -325,7 +324,7 @@
 
         {
           "type": "select",
-          "label": "font wieght on mobile",
+          "label": "font wieght Mobile",
           "id": "font_weight_mobile",
           "default": "500",
 
@@ -418,7 +417,7 @@
 
         {
           "type": "range",
-          "label": "image width on desktop",
+          "label": "image width desktop",
           "id": "image_width",
           "min": 328,
           "max": 1000,
@@ -429,7 +428,7 @@
 
         {
           "type": "range",
-          "label": "image width on mobile",
+          "label": "image width mobile",
           "id": "image_width_mobile",
           "min": 100,
           "max": 350,
@@ -511,7 +510,6 @@
           "type": "select",
           "id": "align_item_inner",
           "label": "align items",
-          "default": "stretch",
 
           "options": [
             {
@@ -534,7 +532,9 @@
               "label": "end"
             },
 
-          ]
+          ],
+
+          "default": "center",
         },
 
         {
@@ -621,7 +621,7 @@
 
   "presets": [
     {
-      "name": "Panel Section"
+      "name": "Panel"
     }
   ]
 }
